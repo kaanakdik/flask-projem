@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-# MySQL bağlantısı (Docker Compose ortam değişkenleri üzerinden)
+# MySQL bağlantısı
 MYSQL_USER = os.environ.get("MYSQL_USER", "root")
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "secret")
 MYSQL_HOST = os.environ.get("MYSQL_HOST", "db")
@@ -21,12 +21,11 @@ class Message(db.Model):
     name = db.Column(db.String(100), nullable=False)
     message = db.Column(db.Text, nullable=False)
 
-# Veritabanını başlat
-@app.before_first_request
-def init_db():
+# --- DB INIT ---
+with app.app_context():
     db.create_all()
+# ----------------
 
-# Ana sayfa
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -39,14 +38,12 @@ def about():
 def contact():
     return render_template("contact.html")
 
-# Form sayfası
 @app.route("/form", methods=["GET", "POST"])
 def form():
     if request.method == "POST":
         name = request.form.get("name")
         message_text = request.form.get("message")
 
-        # Veritabanına kaydet
         new_message = Message(name=name, message=message_text)
         db.session.add(new_message)
         db.session.commit()
@@ -55,7 +52,6 @@ def form():
 
     return render_template("form.html")
 
-# Mesajları listeleme
 @app.route("/messages")
 def messages():
     all_messages = Message.query.order_by(Message.id.desc()).all()
