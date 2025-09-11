@@ -1,5 +1,5 @@
 # Temel imaj
-FROM python:3.11-slim
+FROM python:3.9-slim
 
 # Çalışma dizini
 WORKDIR /app
