@@ -1,4 +1,4 @@
 flask>=2.3
 flask_sqlalchemy
 mysql-connector-python
-# Gunicorn artık Dockerfile içinde versiyon belirledik
+Gunicorn
