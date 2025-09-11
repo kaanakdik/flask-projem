@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mesajlar</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Kaydedilmiş Mesajlar</h1>
+        {% if messages %}
+            <ul>
+            {% for name, message in messages %}
+                <li><strong>{{ name }}:</strong> {{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>Henüz mesaj yok.</p>
+        {% endif %}
+        <a href="/">Ana Sayfa</a> | <a href="/form">Mesaj Gönder</a>
+    </div>
+</body>
+</html>

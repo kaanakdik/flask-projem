@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>İletişim Formu</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>İletişim Formu</h1>
+        <form method="POST">
+            <label for="name">Adınız:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="message">Mesajınız:</label><br>
+            <textarea id="message" name="message" required></textarea><br><br>
+
+            <button type="submit">Gönder</button>
+        </form>
+        <br>
+        <a href="/">Ana Sayfa</a>
+    </div>
+</body>
+</html>
