@@ -4,13 +4,16 @@ import os
 
 app = Flask(__name__)
 
-# MySQL bağlantısı
+# MySQL bağlantısı (Docker Compose env değişkenleri üzerinden)
 MYSQL_USER = os.environ.get("MYSQL_USER", "root")
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "secret")
 MYSQL_HOST = os.environ.get("MYSQL_HOST", "db")
 MYSQL_DB = os.environ.get("MYSQL_DATABASE", "flaskdb")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:3306/{MYSQL_DB}"
+# MySQL 8 için bağlantı stringi
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:3306/{MYSQL_DB}"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
