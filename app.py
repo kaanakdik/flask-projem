@@ -5,10 +5,12 @@ import os
 app = Flask(__name__)
 
 def get_db_connection():
+    with open("/run/secrets/mysql_root_password", "r") as f:
+        mysql_root_password = f.read().strip()
     return mysql.connector.connect(
-        host="db",        # docker-compose'da mysql servisine verdiğimiz isim
+        host="db",
         user="root",
-        password=os.environ.get("MYSQL_ROOT_PASSWORD"),  # secret üzerinden okunacak
+        password=mysql_root_password,
         database="flask_app"
     )
 
