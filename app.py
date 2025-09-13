@@ -10,7 +10,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host="db",        # docker-compose'da mysql servisine verdiğimiz isim
         user="root",
-        password=mysql_root_password,
+        password="password",
         database="flask_app"
     )
 
