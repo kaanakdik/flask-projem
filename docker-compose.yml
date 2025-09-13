@@ -3,7 +3,6 @@ version: "3.9"
 services:
   web:
     image: flask-projem-web:latest
-    build: .
     ports:
       - "5000:5000"
     depends_on:
